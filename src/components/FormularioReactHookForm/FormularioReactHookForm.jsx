@@ -1,4 +1,17 @@
+//import { useState } from "react";
+import { useForm } from "react-hook-form";
+
 const FormularioReactHookForm = () => {
+  //const [mensaje, setMensaje] = useState("");
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = handleSubmit((datos) => console.log(datos));
+
   return (
     <div className="card shadow">
       <div className="card-body">
@@ -6,7 +19,7 @@ const FormularioReactHookForm = () => {
           Formulario React Hook Form
         </h3>
 
-        <form>
+        <form onSubmit={onSubmit}>
           <div className="mb-3">
             <label htmlFor="nombre" className="form-label">
               Nombre:
@@ -19,8 +32,15 @@ const FormularioReactHookForm = () => {
               className="form-control"
               placeholder="Tu nombre"
               autoComplete="name"
-              required
+              {...register("nombre", {
+                required: { value: true, message: "Nombre es requerido." },
+              })}
             />
+            {errors.nombre && (
+              <small className="text-danger d-block mt-1" role="alert">
+                {errors.nombre.message}
+              </small>
+            )}
           </div>
 
           <div className="mb-3">
@@ -29,14 +49,28 @@ const FormularioReactHookForm = () => {
             </label>
 
             <input
-              type="email"
+              type="text"
               id="email"
               name="email"
               className="form-control"
               placeholder="tu@email.com"
               autoComplete="email"
-              required
+              {...register("email", {
+                required: {
+                  value: true,
+                  message: "Correo electónico es requerido.",
+                },
+                pattern: {
+                  value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                  message: "Formato invalido",
+                },
+              })}
             />
+            {errors.email && (
+              <small className="text-danger d-block mt-1" role="alert">
+                {errors.email.message}
+              </small>
+            )}
           </div>
 
           <div className="text-center">
