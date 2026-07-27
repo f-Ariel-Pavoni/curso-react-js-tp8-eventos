@@ -249,19 +249,49 @@ setBtnActivo(false);
 ```
 
 
-# Instalación y ejecución
+## Cómo ejecutar el proyecto
 
-Instalar dependencias:
+Clonar el repositorio:
+
+```bash
+git clone https://github.com/f-Ariel-Pavoni/curso-react-js-tp8-eventos
+```
+
+Ingresar al directorio del proyecto:
+
+```bash
+cd REPOSITORIO
+```
+
+Instalar las dependencias:
 
 ```bash
 npm install
 ```
 
-Ejecutar proyecto:
+Ejecutar el servidor de desarrollo:
 
 ```bash
 npm run dev
 ```
+
+La aplicación estará disponible en:
+
+```text
+http://localhost:5173/
+```
+
+---
+
+## Capturas de pantalla
+
+### Página si errores
+
+![Página de inicio](./src/assets/img/pagina_sin_errores.png)
+
+### Página con errores
+
+![Página de inicio](./src/assets/img/pagina_con_errores.png)
 
 ---
 
