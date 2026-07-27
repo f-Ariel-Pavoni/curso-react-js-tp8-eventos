@@ -285,7 +285,7 @@ http://localhost:5173/
 
 ## Capturas de pantalla
 
-### Página si errores
+### Página sin errores
 
 ![Página de inicio](./src/assets/pagina_sin_errores.png)
 
