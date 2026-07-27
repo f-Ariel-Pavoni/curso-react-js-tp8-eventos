@@ -287,15 +287,15 @@ http://localhost:5173/
 
 ### Página sin errores
 
-![Página de inicio](./src/assets/pagina_sin_errores.png)
+![Página de inicio](https://github.com/USUARIO/REPOSITORIO/blob/main/src/assets/pagina_sin_errores.png)
 
 ### Página con errores
 
-![Página con errores](./src/assets/img/pagina_con_errores.png)
+![Página con errores](https://github.com/USUARIO/REPOSITORIO/blob/main/src/assets/img/pagina_con_errores.png)
 
 ### Registro por consola
 
-![Consola](./src/assets/img/registro_por_consola.png)
+![Consola](https://github.com/USUARIO/REPOSITORIO/blob/main/src/assets/img/registro_por_consola.png)
 
 ---
 
