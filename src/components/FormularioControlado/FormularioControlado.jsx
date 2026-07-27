@@ -4,16 +4,36 @@ const FormularioControlado = () => {
   const [formulario, setFormulario] = useState({ nombre: "", email: "" });
   const [btnActivo, setBtnActivo] = useState(false);
   const [mensaje, setMensaje] = useState("");
+  const [errores, setErrores] = useState({});
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formulario);
 
-    //Reset de formulario al enviar
-    setFormulario({
-      nombre: "",
-      email: "",
-    });
+    const nuevosErrores = {};
+
+    if (!formulario.nombre.trim()) {
+      nuevosErrores.nombre = "Nombre es requerido.";
+    }
+
+    if (!formulario.email.trim()) {
+      nuevosErrores.email = "Correo electrónico es requerido.";
+    } else if (
+      !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(formulario.email)
+    ) {
+      nuevosErrores.email = "Formato inválido.";
+    }
+
+    setErrores(nuevosErrores);
+
+    if (Object.keys(nuevosErrores).length === 0) {
+      console.log(formulario);
+
+      //Reset de formulario al enviar
+      setFormulario({
+        nombre: "",
+        email: "",
+      });
+    }
   };
 
   const handleChange = (e) => {
@@ -22,6 +42,8 @@ const FormularioControlado = () => {
       ...formulario,
       [name]: value,
     });
+
+    setErrores((prevErrores) => ({ ...prevErrores, [name]: "" }));
   };
 
   const handleFocus = (e) => {
@@ -38,7 +60,7 @@ const FormularioControlado = () => {
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter")
-      console.log(`Se presiono enter sobre el cammpo ${e.target.name}.`);
+      console.log(`Se presionó enter sobre el campo ${e.target.name}.`);
   };
 
   const handleMouseEnter = (e) => {
@@ -58,7 +80,7 @@ const FormularioControlado = () => {
           Formulario Eventos Controlados
         </h3>
 
-        <form onSubmit={handleSubmit}>
+        <form noValidate onSubmit={handleSubmit}>
           <div className="mb-3">
             <label htmlFor="nombre" className="form-label">
               Nombre:
@@ -78,6 +100,11 @@ const FormularioControlado = () => {
               onBlur={handleBlur}
               onKeyDown={handleKeyDown}
             />
+            {errores.nombre && (
+              <small className="text-danger d-block mt-1" role="alert">
+                {errores.nombre}
+              </small>
+            )}
           </div>
 
           <div className="mb-3">
@@ -98,6 +125,11 @@ const FormularioControlado = () => {
               onFocus={handleFocus}
               onBlur={handleBlur}
             />
+            {errores.email && (
+              <small className="text-danger d-block mt-1" role="alert">
+                {errores.email}
+              </small>
+            )}
           </div>
 
           <div className="text-center">
