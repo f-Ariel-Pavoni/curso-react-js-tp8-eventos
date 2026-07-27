@@ -287,7 +287,7 @@ http://localhost:5173/
 
 ### Página si errores
 
-![Página de inicio](./src/assets/img/pagina_sin_errores.png)
+![Página de inicio](".src/assets/pagina_sin_errores.png")
 
 ### Página con errores
 
