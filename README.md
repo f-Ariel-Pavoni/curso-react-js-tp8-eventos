@@ -2,7 +2,7 @@
 
 ## Descripción del proyecto
 
-Este proyecto fue desarrollado como práctica del módulo **Manejo de eventos en formularios y componentes en React**.
+Este proyecto fue desarrollado como práctica del módulo Módulo 2 - Unidad 4 **Manejo de eventos en formularios y componentes en React**.
 
 El objetivo principal es implementar y comparar dos formas diferentes de trabajar con formularios en React:
 
@@ -11,7 +11,7 @@ El objetivo principal es implementar y comparar dos formas diferentes de trabaja
 
 Ambas implementaciones permiten capturar información del usuario, validar datos, manejar eventos del navegador y procesar el envío del formulario.
 
-La comparación permite comprender las diferencias entre administrar manualmente el estado de cada campo y utilizar una herramienta especializada para simplificar la gestión del formulario.
+Se montaron ambos formularios en simultaneo para facilitar la comparación. Estas implementaciones permiten comprender las diferencias entre administrar manualmente el estado de cada campo y utilizar una herramienta especializada para simplificar la gestión del formulario.
 
 ---
 
@@ -137,7 +137,7 @@ La librería administra internamente los valores sin necesidad de crear estados 
 
 ---
 
-# Validación con React Hook Form
+# Validación con React Hook Form (se podria utilizar validaciones de schemas con https://zod.dev/)
 
 Las reglas se agregan dentro de `register`:
 
@@ -248,17 +248,6 @@ Al salir:
 setBtnActivo(false);
 ```
 
----
-
-# Conclusión
-
-El formulario controlado permite comprender cómo React administra estados y eventos manualmente.
-
-React Hook Form simplifica la construcción de formularios reduciendo código repetitivo y facilitando validaciones.
-
-Ambos enfoques son válidos y la elección depende de la complejidad del formulario y del nivel de control requerido.
-
----
 
 # Instalación y ejecución
 
@@ -278,13 +267,7 @@ npm run dev
 
 # Autor
 
-Nombre del estudiante:
-
-Curso:
-
-Módulo:
-
-Unidad:
+Nombre del estudiante: Ariel Pavoni
 
 ---
 
