@@ -1,88 +1,266 @@
-# Manejo de eventos en formularios con React
+# Formulario de Eventos en React: Controlled Components vs React Hook Form
 
-Proyecto desarrollado como parte del **Módulo 2 - Unidad 4: Manejo de eventos en formularios y componentes**.
+## Descripción del proyecto
 
-El objetivo de este trabajo es comparar dos enfoques para la construcción y manejo de formularios en React:
+Este proyecto fue desarrollado como práctica del módulo **Manejo de eventos en formularios y componentes en React**.
 
-- Formulario controlado mediante el estado del componente.
-- Formulario implementado utilizando **react-hook-form**.
+El objetivo principal es implementar y comparar dos formas diferentes de trabajar con formularios en React:
 
----
+1. **Formulario controlado utilizando React y useState**
+2. **Formulario utilizando la librería React Hook Form**
 
-## Objetivos del proyecto
+Ambas implementaciones permiten capturar información del usuario, validar datos, manejar eventos del navegador y procesar el envío del formulario.
 
-- Comprender el manejo de eventos en React.
-- Implementar formularios controlados.
-- Comparar el enfoque tradicional basado en `useState` con la utilización de `react-hook-form`.
-- Analizar las diferencias en la implementación y el manejo de los datos del formulario.
+La comparación permite comprender las diferencias entre administrar manualmente el estado de cada campo y utilizar una herramienta especializada para simplificar la gestión del formulario.
 
 ---
 
-## Tecnologías utilizadas
+# Tecnologías utilizadas
 
 - React
 - Vite
-- Bootstrap 5
-- React Hook Form _(implementación en desarrollo)_
+- JavaScript
+- React Hook Form
+- Bootstrap
 
 ---
 
-## Estructura del proyecto
+# Objetivos de la práctica
 
-```text
-src/
-│
-├── components/
-│   ├── FormularioControlado/
-│   │   └── FormularioControlado.jsx
-│   │
-│   └── FormularioReactHookForm/
-│       └── FormularioReactHookForm.jsx
-│
-├── App.jsx
-├── main.jsx
-└── index.css
+Durante el desarrollo se implementaron:
+
+- Formularios controlados.
+- Manejo de estado con `useState`.
+- Captura de eventos en React.
+- Validación manual de formularios.
+- Validación utilizando React Hook Form.
+- Manejo de errores.
+- Reset de formularios.
+- Comparación entre diferentes estrategias de implementación.
+
+Eventos utilizados:
+
+- `onChange`
+- `onFocus`
+- `onBlur`
+- `onKeyDown`
+- `onMouseEnter`
+- `onMouseLeave`
+- `onSubmit`
+
+---
+
+# Comparación de implementaciones
+
+| Característica          | Formulario Controlado | React Hook Form               |
+| ----------------------- | --------------------- | ----------------------------- |
+| Manejo de valores       | useState              | Estado interno de la librería |
+| Actualización de campos | onChange manual       | register                      |
+| Validaciones            | Código propio         | Reglas integradas             |
+| Manejo de errores       | Estado adicional      | formState.errors              |
+| Reset del formulario    | setFormulario         | reset()                       |
+| Cantidad de código      | Mayor                 | Menor                         |
+| Nivel de control        | Alto                  | Delegado a la librería        |
+
+---
+
+# Formulario controlado con useState
+
+En este enfoque React mantiene el control completo de los valores del formulario.
+
+Cada campo está conectado con el estado del componente:
+
+```javascript
+const [formulario, setFormulario] = useState({
+  nombre: "",
+  email: "",
+});
+```
+
+Los cambios realizados por el usuario son capturados mediante `onChange`:
+
+```javascript
+const handleChange = (e) => {
+  const { name, value } = e.target;
+
+  setFormulario({
+    ...formulario,
+    [name]: value,
+  });
+};
+```
+
+La validación debe realizarse manualmente creando la lógica necesaria para verificar cada campo.
+
+Ejemplo:
+
+```javascript
+if (!formulario.nombre.trim()) {
+  nuevosErrores.nombre = "Nombre es requerido.";
+}
+```
+
+Este método brinda mayor control, pero requiere más código.
+
+---
+
+# Formulario con React Hook Form
+
+React Hook Form es una librería que facilita la administración de formularios.
+
+Permite manejar:
+
+- Valores.
+- Validaciones.
+- Errores.
+- Envío.
+- Reset del formulario.
+
+Inicialización:
+
+```javascript
+const {
+  register,
+  handleSubmit,
+  formState: { errors },
+  reset,
+} = useForm();
+```
+
+Los inputs se registran mediante:
+
+```jsx
+{...register("nombre")}
+```
+
+La librería administra internamente los valores sin necesidad de crear estados para cada campo.
+
+---
+
+# Validación con React Hook Form
+
+Las reglas se agregan dentro de `register`:
+
+```javascript
+register("nombre", {
+  required: {
+    value: true,
+    message: "Nombre es requerido.",
+  },
+});
+```
+
+Los errores se obtienen desde:
+
+```javascript
+errors.nombre;
+```
+
+Ejemplo:
+
+```jsx
+{
+  errors.nombre && (
+    <small className="text-danger">{errors.nombre.message}</small>
+  );
+}
 ```
 
 ---
 
-## Estado actual
+# Manejo de eventos implementados
 
-Actualmente el proyecto incluye:
+## onChange
 
-- Estructura base de la aplicación.
-- Integración de Bootstrap.
-- Diseño responsive mediante el sistema de grillas de Bootstrap.
-- Dos componentes independientes para la comparación entre ambos enfoques.
-- Estilos globales iniciales.
+Se ejecuta cuando cambia el valor de un input.
 
-En las siguientes etapas se incorporará la implementación de los eventos solicitados por la consigna y la integración completa de **react-hook-form**.
+En el formulario controlado se utiliza para actualizar el estado manualmente.
+
+En React Hook Form esta gestión es realizada internamente mediante `register`.
 
 ---
 
-## Decisiones de diseño
+## onFocus
 
-Aunque ambos formularios poseen una estructura visual similar, se decidió mantener dos componentes independientes para facilitar la comparación entre ambas implementaciones.
+Se dispara cuando un elemento recibe el foco.
 
-Esta decisión prioriza la claridad didáctica del proyecto, permitiendo observar con mayor facilidad las diferencias entre un formulario controlado y otro implementado con **react-hook-form**.
+Se utilizó para informar qué campo está activo:
 
-La interfaz se mantiene intencionalmente simple para centrar la atención en la implementación de la lógica y el manejo de eventos, utilizando Bootstrap para proporcionar una presentación clara y responsive.
+```javascript
+const handleFocus = (e) => {
+  setMensaje(`El campo ${e.target.name} está activo`);
+};
+```
 
 ---
 
-## Instalación
+## onBlur
 
-Clonar el repositorio:
+Se ejecuta cuando un campo pierde el foco.
 
-```bash
-git clone <URL_DEL_REPOSITORIO>
+Permite detectar cuándo el usuario abandona un input.
+
+En React Hook Form se puede integrar dentro de `register`:
+
+```javascript
+register("nombre", {
+  onBlur: handleBlur,
+});
 ```
 
-Ingresar al proyecto:
+---
 
-```bash
-cd <NOMBRE_DEL_PROYECTO>
+## onKeyDown
+
+Permite detectar teclas presionadas.
+
+Se implementó sobre el campo nombre para detectar la tecla Enter:
+
+```javascript
+const handleKeyDown = (e) => {
+  if (e.key === "Enter") {
+    console.log("Se presionó Enter");
+  }
+};
 ```
+
+---
+
+## onMouseEnter y onMouseLeave
+
+Se utilizaron sobre el botón de envío.
+
+Permiten cambiar dinámicamente las clases Bootstrap:
+
+```javascript
+const [btnActivo, setBtnActivo] = useState(false);
+```
+
+Al ingresar el mouse:
+
+```javascript
+setBtnActivo(true);
+```
+
+Al salir:
+
+```javascript
+setBtnActivo(false);
+```
+
+---
+
+# Conclusión
+
+El formulario controlado permite comprender cómo React administra estados y eventos manualmente.
+
+React Hook Form simplifica la construcción de formularios reduciendo código repetitivo y facilitando validaciones.
+
+Ambos enfoques son válidos y la elección depende de la complejidad del formulario y del nivel de control requerido.
+
+---
+
+# Instalación y ejecución
 
 Instalar dependencias:
 
@@ -90,7 +268,7 @@ Instalar dependencias:
 npm install
 ```
 
-Ejecutar el servidor de desarrollo:
+Ejecutar proyecto:
 
 ```bash
 npm run dev
@@ -98,12 +276,28 @@ npm run dev
 
 ---
 
-## Capturas de pantalla
+# Autor
 
-> Se incorporarán una vez finalizada la implementación de ambos formularios.
+Nombre del estudiante:
+
+Curso:
+
+Módulo:
+
+Unidad:
 
 ---
 
-## Autor
+# Fuentes consultadas
 
-**Ariel Pavoni**
+- React Documentation  
+  https://react.dev/
+
+- React Hook Form Documentation  
+  https://react-hook-form.com/
+
+- Bootstrap Documentation  
+  https://getbootstrap.com/
+
+- MDN Web Docs  
+  https://developer.mozilla.org/
