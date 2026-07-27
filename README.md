@@ -248,7 +248,6 @@ Al salir:
 setBtnActivo(false);
 ```
 
-
 ## Cómo ejecutar el proyecto
 
 Clonar el repositorio:
@@ -287,15 +286,15 @@ http://localhost:5173/
 
 ### Página sin errores
 
-![Página de inicio](https://github.com/USUARIO/REPOSITORIO/blob/main/src/assets/pagina_sin_errores.png)
+![Página de inicio](public/assets/pagina_sin_errores.png)
 
 ### Página con errores
 
-![Página con errores](https://github.com/USUARIO/REPOSITORIO/blob/main/src/assets/img/pagina_con_errores.png)
+![Página con errores](public/assets/pagina_con_errores.png)
 
 ### Registro por consola
 
-![Consola](https://github.com/USUARIO/REPOSITORIO/blob/main/src/assets/img/registro_por_consola.png)
+![Consola](public/assets/registro_por_consola.png)
 
 ---
 
